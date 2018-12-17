@@ -2,10 +2,6 @@ server:
   context-path : /wx
   session-timeout: 1800
   port: 8099
-#  ssl:
-#      key-store: classpath:ssl.zjxpp.com.jks
-#      key-store-password: xpp2018xpp2018
-#      keyStoreType: JKS
 logging:
   level:
     root: info
@@ -34,12 +30,9 @@ spring:
 #   oracle测试机连接方式
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:osap/osap@10.0.5.16:1521:expdbtest
-    username: osap
-    password: osap
-#    url : jdbc:oracle:thin:exp/exp123@10.100.0.10:1530:expora
-#    username : exp
-#    password : exp123
+    url: jdbc:oracle:thin:osap/osap@127.0.0.1:1521:dbtest
+    username: root
+    password: root
 
 #   druid连接池配置
     initialSize: 1
