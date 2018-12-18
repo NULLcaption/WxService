@@ -30,6 +30,11 @@ public class userInfoController {
     @Autowired
     UserInfoService userInfoService;
 
+    /**
+     * @Description 添加微信用户
+     * @Author xg.chen
+     * @Date 13:42 2018/12/18
+     **/
     @GetMapping("/userInfo")
     @ResponseBody
     public String creatWxUserInfo(String openId, String avatarUrl, String nickName, String id) {
@@ -50,6 +55,11 @@ public class userInfoController {
         return "success";
     }
 
+    /**
+     * @Description 获取活动明细表
+     * @Author xg.chen
+     * @Date 13:42 2018/12/18
+     **/
     @GetMapping("/plans")
     @ResponseBody
     public String getPlanActivityList(String openId) {
@@ -58,6 +68,11 @@ public class userInfoController {
         return json;
     }
 
+    /**
+     * @Description 获取活动明细
+     * @Author xg.chen
+     * @Date 13:43 2018/12/18
+     **/
     @GetMapping("/plan")
     @ResponseBody
     public  String getPlanActivityById(String QRCode) {
@@ -86,24 +101,6 @@ public class userInfoController {
         }
         String json = JSONUtils.beanToJson(planActivityDo);
 
-        return json;
-    }
-
-    @GetMapping("/index")
-    public String index(Model model) {
-        UserInfoDo userInfoDo = userInfoService.getUserInfoById(93890);
-        model.addAttribute("userId",userInfoDo.getUserId());
-        model.addAttribute("userName",userInfoDo.getUserName());
-        model.addAttribute("phone",userInfoDo.getMobilephone());
-        model.addAttribute("address",userInfoDo.getAddress());
-        return "index";
-    }
-
-    @RequestMapping("/userInfoById")
-    @ResponseBody
-    public String userInfoById(Model model) {
-        UserInfoDo userInfoDo = userInfoService.getUserInfoById(93890);
-        String json = JSONUtils.beanToJson(userInfoDo);
         return json;
     }
 }
