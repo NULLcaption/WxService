@@ -2,9 +2,7 @@ package com.cxg.weChat.crm.service.impl;
 
 import com.cxg.weChat.core.utils.Query;
 import com.cxg.weChat.crm.mapper.PlanActivityMapper;
-import com.cxg.weChat.crm.pojo.PlanActivityDo;
-import com.cxg.weChat.crm.pojo.WxAdminInfoDo;
-import com.cxg.weChat.crm.pojo.WxPlanPhotoDo;
+import com.cxg.weChat.crm.pojo.*;
 import com.cxg.weChat.crm.service.PlanActivitySrevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,5 +78,36 @@ public class PlanActivitySreviceImpl implements PlanActivitySrevice{
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public List<TestDo> getItemIdList(String detailId) {
+        try{
+            return planActivityMapper.getItemIdList(detailId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public int updateImptentByUpdate(TestDo2 test2) {
+        try{
+            planActivityMapper.updateImptentByUpdate(test2);
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public List<String> getDetailIdList(String detailId) {
+        try {
+            return planActivityMapper.getDetailIdList(detailId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

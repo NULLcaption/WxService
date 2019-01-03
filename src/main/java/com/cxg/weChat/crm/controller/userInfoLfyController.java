@@ -88,22 +88,4 @@ public class userInfoLfyController {
 
         return json;
     }
-
-    @GetMapping("/index")
-    public String index(Model model) {
-        UserInfoDo userInfoDo = userInfoService.getUserInfoById(93890);
-        model.addAttribute("userId",userInfoDo.getUserId());
-        model.addAttribute("userName",userInfoDo.getUserName());
-        model.addAttribute("phone",userInfoDo.getMobilephone());
-        model.addAttribute("address",userInfoDo.getAddress());
-        return "index";
-    }
-
-    @RequestMapping("/userInfoById")
-    @ResponseBody
-    public String userInfoById(Model model) {
-        UserInfoDo userInfoDo = userInfoService.getUserInfoById(93890);
-        String json = JSONUtils.beanToJson(userInfoDo);
-        return json;
-    }
 }

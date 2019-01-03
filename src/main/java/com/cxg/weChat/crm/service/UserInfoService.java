@@ -35,4 +35,6 @@ public interface UserInfoService {
     int updateUserInfoStatus(WxUserInfoDo wxUserInfoDo);
 
     int creatWxAdminPhoto(WxPlanPhotoDo wxPlanPhoto);
+
+    int getUserInfoCountByPlanId(String planId);
 }

@@ -2,6 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cxg.weChat.crm.mapper.PlanActivityMapper">
 
+    <select id="getDetailIdList" parameterType="java.lang.String" resultType="java.lang.String">
+        select distinct t.detail_id detailId
+        from market.market_tb_plan_actual_sales t
+        where t.detail_id &gt; #{detailId} and t.cust_id is not null
+        order by t.detail_id
+    </select>
+
+    <update id="updateImptentByUpdate" parameterType="com.cxg.weChat.crm.pojo.TestDo2">
+        UPDATE market.market_tb_plan_implement t SET t.actual_sales=#{actualSales} where t.item_id=#{itemId}
+    </update>
+
+    <select id="getItemIdList" parameterType="java.lang.String"
+            resultType="com.cxg.weChat.crm.pojo.TestDo">
+        select hl.item_id itemId,
+               hl.mia_detail_id miaDetailId,
+               hl.cust_id custId,
+               tt.actual_sales actualSales
+          from (select l.mia_detail_id mia_detail_id,
+                       l.item_id item_id,
+                       max(decode(l.attr_name, '门店ID', l.attr_value, '')) cust_id,
+                       max(decode(l.attr_name, '门店名称', l.attr_value, '')) cust_name,
+                       max(decode(l.attr_name,
+                                  '费用支付金额',
+                                  l.attr_value,
+                                  'SKU单价',
+                                  l.attr_value,
+                                  0)) pay_money,
+                       max(decode(l.attr_name, '我司承担比例（%）', l.attr_value, 0)) s_ratio,
+                       max(decode(l.attr_name, '开始时间(yyyy/m/d)', l.attr_value, 0)) planStartDate,
+                       max(decode(l.attr_name, '结束时间(yyyy/m/d)', l.attr_value, 0)) planEndDate,
+                       max(decode(l.attr_name, '促销品项', l.attr_value, 0)) promotionalItems,
+                       max(decode(l.attr_name, '促销形式', l.attr_value, 0)) salesPromotion,
+                       max(decode(l.attr_name,
+                                  '促销期间目标销量（标箱）',
+                                  l.attr_value,
+                                  0)) plan_sale
+                  from market.market_tb_plan_item_list l
+                 group by l.item_id, l.mia_detail_id) hl
+        left join market.market_tb_plan_actual_sales tt on tt.detail_id =
+                                                             hl.mia_detail_id
+                                                         and tt.cust_id =
+                                                             hl.cust_id
+        where tt.detail_id = #{detailId}
+        order by hl.item_id desc
+    </select>
+
     <select id="getPlanPhotoList" resultType="com.cxg.weChat.crm.pojo.WxPlanPhotoDo">
         select *
         from (select row_.*, rownum rownum_
@@ -40,7 +86,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by pp.activity_id desc
+                order by pp.creart_date desc
             </otherwise>
         </choose>
         ) row_

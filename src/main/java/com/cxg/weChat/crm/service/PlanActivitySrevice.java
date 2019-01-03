@@ -1,9 +1,7 @@
 package com.cxg.weChat.crm.service;
 
 import com.cxg.weChat.core.utils.Query;
-import com.cxg.weChat.crm.pojo.PlanActivityDo;
-import com.cxg.weChat.crm.pojo.WxAdminInfoDo;
-import com.cxg.weChat.crm.pojo.WxPlanPhotoDo;
+import com.cxg.weChat.crm.pojo.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,4 +25,10 @@ public interface PlanActivitySrevice {
     List<WxPlanPhotoDo> getPlanPhotoList(Query query);
 
     int countPlanPhotoData(Query query);
+
+    List<TestDo> getItemIdList(String detailId);
+
+    int updateImptentByUpdate(TestDo2 test2);
+
+    List<String> getDetailIdList(String detailId);
 }

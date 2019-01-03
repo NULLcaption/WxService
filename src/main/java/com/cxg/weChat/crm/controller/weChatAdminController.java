@@ -181,6 +181,18 @@ public class weChatAdminController {
     }
 
     /**
+     * 根据活动的id获取参加活动的用户的数量
+     * @param planId
+     * @return
+     */
+    @GetMapping("/userCount")
+    @ResponseBody
+    public String getUserInfoCountByPlanId(String planId) {
+        int count = userInfoService.getUserInfoCountByPlanId(planId);
+        return String.valueOf(count);
+    }
+
+    /**
      * @Description: 验证管理员权限
      * @Author: Cheney Master
      * @CreateDate: 2018/11/1 11:29

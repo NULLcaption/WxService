@@ -129,4 +129,14 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
         return 0;
     }
+
+    @Override
+    public int getUserInfoCountByPlanId(String planId) {
+        try {
+            return userInfoMapper.getUserInfoCountByPlanId(planId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

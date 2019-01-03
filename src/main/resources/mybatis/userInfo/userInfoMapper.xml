@@ -80,6 +80,16 @@
 		(MARKET.MARKET_SEQ_WX_ADMIN_INFO.nextval,#{openId},#{nickName},#{avatarUrl},#{signAddress},#{signDate},#{activityId})
 	</insert>
 
+	<select id="getUserInfoCountByPlanId" parameterType="java.lang.String"
+			resultType="java.lang.Integer">
+		select count(*)
+		  from market.market_wx_user_info t
+		  left join market.market_tb_plan_activity p on p.id = t.activity_id
+		 where t.activity_id = #{planId}
+		   and t.status = 'Y'
+		 order by t.id desc
+	</select>
+
     <select id="getUserInfoByPlanId" parameterType="java.lang.String"
             resultType="com.cxg.weChat.crm.pojo.PlanActivityDo">
 		select case (t.status)
@@ -90,7 +100,8 @@
 			   t.nick_name nickName
 		  from market.market_wx_user_info t
 		left join market.market_tb_plan_activity p on p.id = t.activity_id
-		 where t.activity_id = #{planId} and t.status = 'Y'
+		 where t.activity_id = #{planId} and t.status = 'Y' and rownum &lt; 51
+		order by t.id desc
 	</select>
 
     <select id="findUserInfoStatus" parameterType="com.cxg.weChat.crm.pojo.WxUserInfoDo"

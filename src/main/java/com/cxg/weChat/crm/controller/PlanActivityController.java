@@ -3,9 +3,7 @@ package com.cxg.weChat.crm.controller;
 import com.cxg.weChat.core.utils.PageUtils;
 import com.cxg.weChat.core.utils.Query;
 import com.cxg.weChat.core.utils.R;
-import com.cxg.weChat.crm.pojo.PlanActivityDo;
-import com.cxg.weChat.crm.pojo.WxAdminInfoDo;
-import com.cxg.weChat.crm.pojo.WxPlanPhotoDo;
+import com.cxg.weChat.crm.pojo.*;
 import com.cxg.weChat.crm.service.PlanActivitySrevice;
 import org.apache.poi.hssf.usermodel.*;
 import org.slf4j.Logger;
@@ -33,6 +31,32 @@ public class PlanActivityController extends BaseController {
 
     @Autowired
     PlanActivitySrevice planActivitySrevice;
+
+    @GetMapping("/updateData")
+    @ResponseBody
+    public String updateData(String detailId) {
+        System.out.println(detailId);//137115
+        List<String> detailIds = planActivitySrevice.getDetailIdList(detailId);
+        if (detailIds != null) {
+            for (int i = 0; i < detailIds.size(); i++) {
+                List<TestDo> list = planActivitySrevice.getItemIdList(detailIds.get(i));
+                if (list != null) {
+                    int count;
+                    for (TestDo test : list) {
+                        TestDo2 test2 = new TestDo2();
+                        test2.setItemId(test.getItemId());
+                        test2.setActualSales(test.getActualSales());
+                        count = planActivitySrevice.updateImptentByUpdate(test2);
+                        if (count ==0 ) {
+                            return  "更新失败";
+                        }
+                        count++;
+                    }
+                }
+            }
+        }
+        return "更新成功";
+    }
 
     /**
      * @Description 现场执行活动照片
