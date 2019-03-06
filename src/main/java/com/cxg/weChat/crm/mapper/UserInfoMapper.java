@@ -37,4 +37,6 @@ public interface UserInfoMapper {
     void creatWxAdminPhoto(WxPlanPhotoDo wxPlanPhoto);
 
     int getUserInfoCountByPlanId(String planId);
+
+    String getWxUserInfoById4Status(WxUserInfoDo wxUserInfoDo);
 }

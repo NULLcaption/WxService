@@ -47,6 +47,13 @@
 		where t.open_id = #{openId} and t.activity_id = #{activityId}
 	</select>
 
+	<select id="getWxUserInfoById4Status" parameterType="com.cxg.weChat.crm.pojo.WxUserInfoDo"
+			resultType="java.lang.String">
+		select t.status
+		from market.market_wx_user_info t
+		where t.open_id = #{openId} and t.activity_id = #{activityId}
+	</select>
+
     <insert id="creatWxUserInfo" parameterType="com.cxg.weChat.crm.pojo.WxUserInfoDo">
 		INSERT INTO market.market_wx_user_info
 			(ID,OPEN_ID,NICK_NAME,AVATAR_URL,ACTIVITY_ID,STATUS)

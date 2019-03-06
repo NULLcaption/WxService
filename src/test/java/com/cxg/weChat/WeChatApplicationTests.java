@@ -21,7 +21,7 @@ public class WeChatApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		String detailId = "137022";
+		String detailId = "162546";
 		List<TestDo> list = planActivitySrevice.getItemIdList(detailId);
 		if (list != null) {
 			int count = 0;

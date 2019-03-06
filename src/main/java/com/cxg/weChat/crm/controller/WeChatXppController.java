@@ -72,11 +72,10 @@ public class WeChatXppController {
         if (status.equals("N")){
             int num = userInfoService.updateUserInfoStatus(wxUserInfoDo);
             if (num == 0) {
-                return "error";
+                return "error";//用户已领取
             }
-            return "success";
         }
-        return "error";
+        return "success";//用户未领取
 
     }
 
@@ -145,11 +144,5 @@ public class WeChatXppController {
             e.printStackTrace();
         }
         return json;
-    }
-
-    @RequestMapping("/index")
-    @ResponseBody
-    public String index() {
-        return "Hello wechat service";
     }
 }

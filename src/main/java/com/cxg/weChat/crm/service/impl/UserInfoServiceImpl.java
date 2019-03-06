@@ -139,4 +139,14 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
         return 0;
     }
+
+    @Override
+    public String getWxUserInfoById4Status(WxUserInfoDo wxUserInfoDo) {
+        try {
+            return userInfoMapper.getWxUserInfoById4Status(wxUserInfoDo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

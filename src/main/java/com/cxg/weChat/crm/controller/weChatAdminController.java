@@ -36,7 +36,7 @@ import java.util.UUID;
  */
 
 @Controller
-@RequestMapping("/api/wx/admin")
+        @RequestMapping("/api/wx/admin")
 public class weChatAdminController {
     private static Logger logger = LoggerFactory.getLogger(weChatAdminController.class);
 
@@ -142,6 +142,28 @@ public class weChatAdminController {
     }
 
     /**
+     * 扫码之前验证用户是否领取过了
+     * @param QRCode
+     * @param openid
+     * @return
+     */
+    @RequestMapping("/confirm")
+    @ResponseBody
+    public String checkCcomfrim(String QRCode,String openid) {
+        //处理获取到的二维码
+        String[] strs = QRCode.split("-");
+        String id = strs[0].toString();
+        WxUserInfoDo wxUserInfoDo = new WxUserInfoDo();
+        wxUserInfoDo.setOpenId(openid);
+        wxUserInfoDo.setActivityId(id);
+        String status = userInfoService.findUserInfoStatus(wxUserInfoDo);
+        if (status.equals("Y")){
+            return "success";
+        }
+        return "error";
+    }
+
+    /**
      * @Description: 验证用户领取奖品的二维码
      * @Author: Cheney Master
      * @CreateDate: 2018/11/1 15:15
@@ -155,15 +177,13 @@ public class weChatAdminController {
         wxUserInfoDo.setOpenId(scanCodeInfo);
         wxUserInfoDo.setActivityId(planId);
         String status = userInfoService.findUserInfoStatus(wxUserInfoDo);
-        if (status.equals("N")) {
+        if (status.equals("N")){
             int num = userInfoService.updateUserInfoStatus(wxUserInfoDo);
             if (num == 0) {
-                return "error";
+                return "error";//用户已领取
             }
-            return "success";
         }
-        return "error";
-
+        return "success";//用户未领取
     }
 
     /**

@@ -1,18 +1,24 @@
 server:
   context-path : /wx
   session-timeout: 1800
-  port: 8099
+#  port: 8099
+#  https访问端口以及加密设置
+  port: 443
+  ssl:
+        key-store: classpath:ssl.zjxpp.com.jks
+        key-store-password: xpp2018xpp2018
+        keyStoreType: JKS
 logging:
   level:
     root: info
     com.cxg.weChat: debug
 wechat:
 #  正式机路径
-#  uploadPath: C:/var/uploaded_files/
-#  imagePath: file:///C:/var/uploaded_files/plan/
+  uploadPath: /var/uploaded_files/
+  imagePath: file:///var/uploaded_files/plan/
 #  测试机路径
-  uploadPath: D:/var/uploaded_files/
-  imagePath: file:///D:/var/uploaded_files/plan/
+#  uploadPath: D:/var/uploaded_files/
+#  imagePath: file:///D:/var/uploaded_files/plan/
 spring:
   thymeleaf:
     mode: LEGACYHTML5
@@ -28,18 +34,23 @@ spring:
 #    url: jdbc:mysql://127.0.0.1:3306/bootdotest?useUnicode=true&characterEncoding=utf8
 #   oracle连接方式
 #   oracle测试机连接方式
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    driverClassName: oracle.jdbc.OracleDriver
+#    url: jdbc:oracle:thin:osap/osap@10.0.5.16:1521:expdbtest
+#    username: osap
+#    password: osap
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:osap/osap@127.0.0.1:1521:dbtest
-    username: root
-    password: root
+    url: jdbc:oracle:thin:exp/exp123@10.100.0.10:1530:expora
+    username: exp
+    password: exp123
 
 #   druid连接池配置
     initialSize: 1
-    minIdle: 3
-    maxActive: 20
+    minIdle: 10
+    maxActive: 1000
     # 配置获取连接等待超时的时间
-    maxWait: 60000
+    maxWait: 120000
     # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
     timeBetweenEvictionRunsMillis: 60000
     # 配置一个连接在池中最小生存的时间，单位是毫秒
@@ -50,7 +61,7 @@ spring:
     testOnReturn: false
     # 打开PSCache，并且指定每个连接上PSCache的大小
     poolPreparedStatements: true
-    maxPoolPreparedStatementPerConnectionSize: 20
+    maxPoolPreparedStatementPerConnectionSize: 200
     # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
     filters: stat,wall,slf4j
     # 通过connectProperties属性来打开mergeSql功能；慢SQL记录

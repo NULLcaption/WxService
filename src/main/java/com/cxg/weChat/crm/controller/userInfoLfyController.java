@@ -45,7 +45,11 @@ public class userInfoLfyController {
         if (num == 0) {//没有的话就插入
             userInfoService.creatWxUserInfo(wxUserInfoDo);
         } else {
-            return "error";
+            //查看是不是已经已领取的状态
+            String status = userInfoService.getWxUserInfoById4Status(wxUserInfoDo);
+            if ("Y".equals(status)) {
+                return "error";
+            }
         }
         return "success";
     }
