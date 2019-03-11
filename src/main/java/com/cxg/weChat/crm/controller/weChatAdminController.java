@@ -36,7 +36,7 @@ import java.util.UUID;
  */
 
 @Controller
-        @RequestMapping("/api/wx/admin")
+@RequestMapping("/api/wx/admin")
 public class weChatAdminController {
     private static Logger logger = LoggerFactory.getLogger(weChatAdminController.class);
 
@@ -157,8 +157,10 @@ public class weChatAdminController {
         wxUserInfoDo.setOpenId(openid);
         wxUserInfoDo.setActivityId(id);
         String status = userInfoService.findUserInfoStatus(wxUserInfoDo);
-        if (status.equals("Y")){
-            return "success";
+        if (null != status) {
+            if (status.equals("Y")){
+                return "success";
+            }
         }
         return "error";
     }

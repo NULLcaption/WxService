@@ -16,13 +16,12 @@ public class WeChatApplication  extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(WeChatApplication.class, args);
-		System.out.println("ヾ(◍°∇°◍)ﾉﾞ    霸天虎启动!!      ヾ(◍°∇°◍)ﾉﾞ\n" +
-				" ______                    _   ______            \n" +
-				"|_   _ \\                  / |_|_   _ `.          \n" +
-				"  | |_) |   .--.    .--. `| |-' | | `. \\  .--.   \n" +
-				"  |  __'. / .'`\\ \\/ .'`\\ \\| |   | |  | |/ .'`\\ \\ \n" +
-				" _| |__) || \\__. || \\__. || |, _| |_.' /| \\__. | \n" +
-				"|_______/  '.__.'  '.__.' \\__/|______.'  '.__.'  ");
+		System.out.println("<-------Megatron Running----------> \n"+
+				" __  __               _                \n" +
+				"|  \\/  |___ __ _ __ _| |_ _ _ ___ _ _  \n" +
+				"| |\\/| / -_) _` / _` |  _| '_/ _ \\ ' \\ \n" +
+				"|_|  |_\\___\\__, \\__,_|\\__|_| \\___/_||_|\n" +
+				"           |___/                       ");
 	}
 
 }
